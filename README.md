@@ -68,7 +68,7 @@ Insights are batch-generated with Google Gemini from a prompt template written b
 ## Next build
 
 - Add VIIRS NOAA-20 as the successor to Suomi-NPP.
-- Live, on-demand AI search and briefings.
+- Live, on-demand AI search, briefings and make-the-call suggestions.
 - A time-integrated fire radiative energy (FRE) measure.
 
 ## Run it
