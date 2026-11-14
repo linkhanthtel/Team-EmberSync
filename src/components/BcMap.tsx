@@ -1,7 +1,7 @@
 import { geoConicEqualArea, geoPath, type GeoPermissibleObjects } from 'd3-geo'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
-import { SENSOR_LABEL, confidenceLabel, shortCentre, type CentreFeature, type CentreSel, type FireCentre, type Metric, type MonthCell, type WatchDot } from '../lib/fire.ts'
+import { SENSOR_LABEL, confidenceLabel, describeLandmark, shortCentre, type CentreFeature, type CentreSel, type FireCentre, type Metric, type MonthCell, type WatchDot } from '../lib/fire.ts'
 import { CENTRE_COLOR, CHART, fireRamp, fmtInt, logScale } from '../lib/theme.ts'
 import { fmtMetric } from './charts.tsx'
 
@@ -229,6 +229,12 @@ function HoverBody({ h, metric }: { h: Hover; metric: Metric }) {
       <div className="font-semibold text-ink">Lone dot · {d.date}</div>
       <div className="text-muted mb-2">
         {shortCentre(d.centre)} · {SENSOR_LABEL[d.sensor]} {d.satellite === 'N' ? 'S-NPP' : d.satellite} · {d.time.slice(0, 2)}:{d.time.slice(2)} UTC
+      </div>
+      <div className="text-ink-2 mb-1.5">
+        {describeLandmark(d.place)}
+        <div className="text-muted">
+          {describeLandmark(d.feature)} ({d.feature.type})
+        </div>
       </div>
       <Row label="Position" value={`${d.lat.toFixed(3)}, ${d.lon.toFixed(3)}`} />
       <Row label="FRP" value={`${d.frp.toFixed(1)} MW`} />

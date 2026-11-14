@@ -12,7 +12,11 @@ export function Footer() {
             <p className="text-ink-2 font-medium mb-1">Data: NASA FIRMS, 2001–2025.</p>
             <p>
               MODIS Collection 6.1 and VIIRS Suomi-NPP 375 m active fire detections, cleaned to BC vegetation fires and harmonised onto one calendar. We acknowledge the use of
-              data and imagery from LANCE FIRMS operated by NASA's Earth Science Data and Information System (ESDIS).
+              data and imagery from LANCE FIRMS operated by NASA's Earth Science Data and Information System (ESDIS). Place names:{' '}
+              <a href="https://www.geonames.org/" target="_blank" rel="noreferrer" className="underline hover:text-ink-2">
+                GeoNames
+              </a>
+              , CC BY 4.0.
             </p>
           </div>
         </div>

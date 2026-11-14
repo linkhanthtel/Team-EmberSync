@@ -11,6 +11,7 @@ import {
   SENSOR_LABEL,
   calendarCell,
   calendarSensor,
+  placesToWatch,
   shortCentre,
   ymLabel,
   type CalendarRow,
@@ -85,24 +86,9 @@ for (const c of FIRE_CENTRES)
   }
 
 const fmtInt = (n: number) => Math.round(n).toLocaleString('en-US')
-const fmtLat = (lat: number) => `${lat.toFixed(2)}°N`
-const fmtLon = (lon: number) => `${Math.abs(lon).toFixed(2)}°W`
-
-/** The 0.1° cell with the most lone dots for this centre-month, if any. */
+/** The nearest place with the most lone dots for this centre-month, if any. */
 function watchArea(dots: WatchDot[] | undefined, centre: FireCentre) {
-  if (!dots) return null
-  const by = new Map<string, { n: number; lat: number; lon: number }>()
-  for (const d of dots) {
-    if (d.centre !== centre) continue
-    const e = by.get(d.cellId) ?? { n: 0, lat: 0, lon: 0 }
-    e.n++
-    e.lat += d.lat
-    e.lon += d.lon
-    by.set(d.cellId, e)
-  }
-  let best: { n: number; lat: number; lon: number } | null = null
-  for (const e of by.values()) if (!best || e.n > best.n) best = e
-  return best && { n: best.n, lat: best.lat / best.n, lon: best.lon / best.n }
+  return dots ? (placesToWatch(dots.filter((d) => d.centre === centre))[0] ?? null) : null
 }
 
 function draft(r: CalendarRow, dots: WatchDot[] | undefined): Pick<Insight, 'text' | 'ratio'> {
@@ -119,8 +105,9 @@ function draft(r: CalendarRow, dots: WatchDot[] | undefined): Pick<Insight, 'tex
 
   const vs =
     ratio == null ? '' : ratio >= 1.5 ? `, ${ratio.toFixed(1)}× the ${mName} mean` : ratio <= 0.5 ? `, ${Math.round(ratio * 100)}% of the ${mName} mean` : `, near the ${mName} mean`
-  const area = watchArea(dots, r.centre)
-  const watch = area ? `; watch ${area.n} lone dot${area.n > 1 ? 's' : ''} near ${fmtLat(area.lat)} ${fmtLon(area.lon)}` : ''
+  // Count lone dots from the same sensor the sentence names (as the Watch screen does).
+  const area = watchArea(dots?.filter((d) => d.sensor === sensor), r.centre)
+  const watch = area ? `; watch ${area.n} lone dot${area.n > 1 ? 's' : ''} around ${area.place}` : ''
   return { text: `${name}, ${when}: ${fmtInt(r.count)} ${what}${vs}${watch}.`, ratio }
 }
 

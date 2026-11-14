@@ -231,16 +231,45 @@ export interface WatchDot {
   lowConf: boolean
   frp: number
   day: boolean
+  /** Nearest GeoNames populated place; distance/bearing run from the place to the dot. */
+  place: Landmark
+  /** Nearest GeoNames natural feature (lake, mountain, valley…). */
+  feature: Landmark
 }
+
+export interface Landmark {
+  name: string
+  type: string
+  km: number
+  bearing: string
+}
+
+/** "13 km SSW of Sikanni Chief" (or "at Taylor" when under 1 km). */
+export const describeLandmark = (l: Landmark) => (l.km < 1 ? `at ${l.name}` : `${l.km < 10 ? l.km.toFixed(1) : Math.round(l.km)} km ${l.bearing} of ${l.name}`)
 
 const VIIRS_CONF: Record<string, string> = { l: 'low', n: 'nominal', h: 'high' }
 /** MODIS confidence is 0–100; VIIRS is l/n/h. */
 export const confidenceLabel = (d: Pick<WatchDot, 'sensor' | 'confidence'>) => (d.sensor === 'VIIRS_SNPP' ? (VIIRS_CONF[d.confidence] ?? d.confidence) : `${d.confidence}%`)
 
-/** Watch list (lone dots) indexed by ym. */
+/** Lone dots grouped by nearest place, most dots first (ties: closest average distance). */
+export function placesToWatch(dots: WatchDot[]) {
+  const by = new Map<string, { place: string; n: number; km: number; frp: number; lowConf: number }>()
+  for (const d of dots) {
+    const e = by.get(d.place.name) ?? { place: d.place.name, n: 0, km: 0, frp: 0, lowConf: 0 }
+    e.n++
+    e.km += d.place.km
+    e.frp += d.frp
+    if (d.lowConf) e.lowConf++
+    by.set(d.place.name, e)
+  }
+  return [...by.values()].map((e) => ({ ...e, km: e.km / e.n })).sort((a, b) => b.n - a.n || a.km - b.km)
+}
+
+/** Watch list (lone dots, with GeoNames place names) indexed by ym. */
 export const loadWatchList = once(async () => {
   const { header, rows } = parseCsv(await fetchText(watchUrl))
-  const c = columns(header, ['sensor', 'satellite', 'acq_date', 'acq_time', 'latitude', 'longitude', 'cell_id', 'fire_centre', 'confidence', 'low_conf', 'frp', 'daynight'] as const)
+  const c = columns(header, ['sensor', 'satellite', 'acq_date', 'acq_time', 'latitude', 'longitude', 'cell_id', 'fire_centre', 'confidence', 'low_conf', 'frp', 'daynight',
+    'nearest_place', 'place_type', 'place_distance_km', 'place_bearing', 'nearest_feature', 'feature_type', 'feature_distance_km', 'feature_bearing'] as const)
   const byYm = new Map<string, WatchDot[]>()
   rows.forEach((r, id) => {
     const date = r[c.acq_date]
@@ -261,6 +290,8 @@ export const loadWatchList = once(async () => {
       lowConf: r[c.low_conf] === 'True',
       frp: +r[c.frp],
       day: r[c.daynight] === 'D',
+      place: { name: r[c.nearest_place], type: r[c.place_type], km: +r[c.place_distance_km], bearing: r[c.place_bearing] },
+      feature: { name: r[c.nearest_feature], type: r[c.feature_type], km: +r[c.feature_distance_km], bearing: r[c.feature_bearing] },
     })
   })
   return byYm

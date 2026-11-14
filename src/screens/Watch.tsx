@@ -12,6 +12,8 @@ import {
   calendarCell,
   calendarSensor,
   confidenceLabel,
+  describeLandmark,
+  placesToWatch,
   loadCentres,
   loadMonthCells,
   loadWatchList,
@@ -61,6 +63,7 @@ export function Watch({
     [cells, centre, metric],
   )
   const myDots = useMemo(() => dots.filter((d) => !centre || d.centre === centre).sort((a, b) => b.frp - a.frp), [dots, centre])
+  const places = useMemo(() => placesToWatch(myDots), [myDots])
   const cal = calendarCell(centre, ym)
   const insight = centre && watchIdx ? insightFor(centre, ym, watchIdx.get(ym)) : null
 
@@ -157,7 +160,7 @@ export function Watch({
                     <tr className="border-b border-line">
                       <th className="py-1.5 font-normal">Date</th>
                       {!centre && <th className="py-1.5 font-normal">Centre</th>}
-                      <th className="py-1.5 font-normal">Position</th>
+                      <th className="py-1.5 font-normal">Near</th>
                       <th className="py-1.5 font-normal text-right">FRP</th>
                       <th className="py-1.5 font-normal text-right">Conf.</th>
                     </tr>
@@ -167,8 +170,8 @@ export function Watch({
                       <tr key={d.id} className="border-b border-line/50">
                         <td className="py-1.5 tabular text-ink-2 whitespace-nowrap">{d.date.slice(5)}</td>
                         {!centre && <td className="py-1.5 text-ink-2">{shortCentre(d.centre)}</td>}
-                        <td className="py-1.5 tabular text-ink-2 whitespace-nowrap">
-                          {d.lat.toFixed(2)}, {d.lon.toFixed(2)}
+                        <td className="py-1.5 text-ink-2" title={`${d.lat.toFixed(3)}, ${d.lon.toFixed(3)} · ${describeLandmark(d.feature)} (${d.feature.type})`}>
+                          {describeLandmark(d.place)}
                         </td>
                         <td className="py-1.5 tabular text-ink text-right">{d.frp.toFixed(1)}</td>
                         <td className={`py-1.5 tabular text-right ${d.lowConf ? 'text-ai' : 'text-ink-2'}`}>{confidenceLabel(d)}</td>
@@ -178,6 +181,30 @@ export function Watch({
                 </table>
                 {myDots.length > 200 && <p className="text-[11px] text-muted mt-2">Showing 200 of {fmtInt(myDots.length)}.</p>}
               </div>
+            )}
+          </ChartCard>
+
+          <ChartCard title="Places to watch" subtitle="Lone dots this month grouped by nearest place (GeoNames)">
+            {places.length === 0 ? (
+              <p className="text-xs text-muted">{watchIdx ? 'No lone dots this month.' : 'Loading…'}</p>
+            ) : (
+              <ul className="space-y-2">
+                {places.slice(0, 6).map((p) => (
+                  <li key={p.place}>
+                    <div className="flex justify-between gap-2 text-xs mb-1">
+                      <span className="text-ink-2 truncate">
+                        {p.place} <span className="text-muted">· avg {p.km.toFixed(0)} km away{p.lowConf ? ` · ${p.lowConf} low conf.` : ''}</span>
+                      </span>
+                      <span className="tabular text-ink font-medium shrink-0">
+                        {p.n} dot{p.n > 1 ? 's' : ''}
+                      </span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-surface-2 overflow-hidden">
+                      <div className="h-full rounded-full bg-ink-2" style={{ width: `${(p.n / places[0].n) * 100}%` }} />
+                    </div>
+                  </li>
+                ))}
+              </ul>
             )}
           </ChartCard>
 

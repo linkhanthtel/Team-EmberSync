@@ -39,7 +39,7 @@ Cleaning, from 8,250,767 Canada detections to 1,792,662 BC vegetation-fire detec
 | `bc_firms_clean_2001_2025.csv.gz` | 1,792,662 | Every cleaned BC detection (gzipped) |
 | `bc_monthly_calendar_2001_2025.csv` | 1,800 | 6 fire centres x 300 months: counts, fire energy, low-confidence counts, harmonised values |
 | `bc_month_cells_2001_2025.csv` | 81,647 | One row per 0.1 degree cell per month per sensor, for the map |
-| `bc_watch_list_2001_2025.csv` | 45,015 | Lone dots: the only detection in its 0.1 degree cell on that day |
+| `bc_watch_list_2001_2025.csv` | 45,015 | Lone dots: the only detection in its 0.1 degree cell on that day, with the nearest GeoNames place and natural feature (distance, bearing) |
 | `bc_fire_centres_simplified.geojson` | 6 | Fire-centre boundaries for the web map |
 
 ## Method
