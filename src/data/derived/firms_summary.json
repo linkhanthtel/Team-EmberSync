@@ -1,0 +1,347 @@
+{
+ "source": "src/data/bc_firms_clean_2001_2025.csv.gz",
+ "generatedAt": "2026-11-14T06:31:21.545Z",
+ "total": {
+  "count": 1792662,
+  "lowConf": 93000,
+  "day": 781831,
+  "frp": 66946699
+ },
+ "bySensorYear": {
+  "MODIS": [
+   {
+    "year": 2001,
+    "count": 1590,
+    "lowConf": 138,
+    "day": 1060,
+    "frp": 80896
+   },
+   {
+    "year": 2002,
+    "count": 3396,
+    "lowConf": 284,
+    "day": 2927,
+    "frp": 194771
+   },
+   {
+    "year": 2003,
+    "count": 14286,
+    "lowConf": 1198,
+    "day": 8673,
+    "frp": 1321630
+   },
+   {
+    "year": 2004,
+    "count": 10124,
+    "lowConf": 880,
+    "day": 7344,
+    "frp": 878078
+   },
+   {
+    "year": 2005,
+    "count": 5507,
+    "lowConf": 507,
+    "day": 4695,
+    "frp": 342888
+   },
+   {
+    "year": 2006,
+    "count": 5889,
+    "lowConf": 590,
+    "day": 4508,
+    "frp": 528875
+   },
+   {
+    "year": 2007,
+    "count": 6352,
+    "lowConf": 636,
+    "day": 5334,
+    "frp": 511547
+   },
+   {
+    "year": 2008,
+    "count": 5781,
+    "lowConf": 530,
+    "day": 5067,
+    "frp": 469112
+   },
+   {
+    "year": 2009,
+    "count": 11447,
+    "lowConf": 987,
+    "day": 7461,
+    "frp": 1225186
+   },
+   {
+    "year": 2010,
+    "count": 17041,
+    "lowConf": 1532,
+    "day": 10197,
+    "frp": 1914416
+   },
+   {
+    "year": 2011,
+    "count": 4354,
+    "lowConf": 474,
+    "day": 3765,
+    "frp": 402109
+   },
+   {
+    "year": 2012,
+    "count": 6259,
+    "lowConf": 597,
+    "day": 4303,
+    "frp": 532563
+   },
+   {
+    "year": 2013,
+    "count": 6134,
+    "lowConf": 550,
+    "day": 5078,
+    "frp": 488402
+   },
+   {
+    "year": 2014,
+    "count": 13496,
+    "lowConf": 1373,
+    "day": 8172,
+    "frp": 1602662
+   },
+   {
+    "year": 2015,
+    "count": 12335,
+    "lowConf": 1170,
+    "day": 8584,
+    "frp": 1288200
+   },
+   {
+    "year": 2016,
+    "count": 5835,
+    "lowConf": 536,
+    "day": 4629,
+    "frp": 523039
+   },
+   {
+    "year": 2017,
+    "count": 42315,
+    "lowConf": 3477,
+    "day": 25168,
+    "frp": 4737348
+   },
+   {
+    "year": 2018,
+    "count": 46132,
+    "lowConf": 4295,
+    "day": 24145,
+    "frp": 5750243
+   },
+   {
+    "year": 2019,
+    "count": 4574,
+    "lowConf": 453,
+    "day": 3727,
+    "frp": 274928
+   },
+   {
+    "year": 2020,
+    "count": 2701,
+    "lowConf": 265,
+    "day": 2141,
+    "frp": 138719
+   },
+   {
+    "year": 2021,
+    "count": 33879,
+    "lowConf": 2804,
+    "day": 17553,
+    "frp": 3918210
+   },
+   {
+    "year": 2022,
+    "count": 7459,
+    "lowConf": 739,
+    "day": 4654,
+    "frp": 720119
+   },
+   {
+    "year": 2023,
+    "count": 78064,
+    "lowConf": 7035,
+    "day": 40762,
+    "frp": 11192618
+   },
+   {
+    "year": 2024,
+    "count": 32587,
+    "lowConf": 2889,
+    "day": 18029,
+    "frp": 3811106
+   },
+   {
+    "year": 2025,
+    "count": 18448,
+    "lowConf": 1591,
+    "day": 11062,
+    "frp": 2938113
+   }
+  ],
+  "VIIRS_SNPP": [
+   {
+    "year": 2012,
+    "count": 25329,
+    "lowConf": 1049,
+    "day": 10774,
+    "frp": 345021
+   },
+   {
+    "year": 2013,
+    "count": 19565,
+    "lowConf": 1409,
+    "day": 10847,
+    "frp": 328324
+   },
+   {
+    "year": 2014,
+    "count": 66752,
+    "lowConf": 3313,
+    "day": 26524,
+    "frp": 974639
+   },
+   {
+    "year": 2015,
+    "count": 46029,
+    "lowConf": 2568,
+    "day": 22121,
+    "frp": 754977
+   },
+   {
+    "year": 2016,
+    "count": 20064,
+    "lowConf": 1268,
+    "day": 10630,
+    "frp": 326393
+   },
+   {
+    "year": 2017,
+    "count": 178360,
+    "lowConf": 7671,
+    "day": 77946,
+    "frp": 2824859
+   },
+   {
+    "year": 2018,
+    "count": 234971,
+    "lowConf": 7600,
+    "day": 75282,
+    "frp": 3364313
+   },
+   {
+    "year": 2019,
+    "count": 16814,
+    "lowConf": 1082,
+    "day": 9333,
+    "frp": 213416
+   },
+   {
+    "year": 2020,
+    "count": 10992,
+    "lowConf": 507,
+    "day": 5246,
+    "frp": 126200
+   },
+   {
+    "year": 2021,
+    "count": 137869,
+    "lowConf": 5445,
+    "day": 51488,
+    "frp": 2061812
+   },
+   {
+    "year": 2022,
+    "count": 30555,
+    "lowConf": 1317,
+    "day": 12076,
+    "frp": 430985
+   },
+   {
+    "year": 2023,
+    "count": 385587,
+    "lowConf": 13557,
+    "day": 134810,
+    "frp": 5653205
+   },
+   {
+    "year": 2024,
+    "count": 138097,
+    "lowConf": 6561,
+    "day": 56930,
+    "frp": 2128181
+   },
+   {
+    "year": 2025,
+    "count": 85693,
+    "lowConf": 4123,
+    "day": 38786,
+    "frp": 1628594
+   }
+  ]
+ },
+ "bySatellite": {
+  "MODIS Terra": {
+   "count": 207864,
+   "lowConf": 19178,
+   "day": 96652,
+   "frp": 21841833
+  },
+  "MODIS Aqua": {
+   "count": 188121,
+   "lowConf": 16352,
+   "day": 142386,
+   "frp": 23943946
+  },
+  "VIIRS_SNPP N": {
+   "count": 1396677,
+   "lowConf": 57470,
+   "day": 542793,
+   "frp": 21160920
+  }
+ },
+ "byCentre": {
+  "Prince George Fire Centre": {
+   "count": 805675,
+   "lowConf": 41414,
+   "day": 350094,
+   "frp": 29925597
+  },
+  "Cariboo Fire Centre": {
+   "count": 279781,
+   "lowConf": 16070,
+   "day": 142796,
+   "frp": 11795360
+  },
+  "Coastal Fire Centre": {
+   "count": 109280,
+   "lowConf": 5054,
+   "day": 45516,
+   "frp": 3465360
+  },
+  "Southeast Fire Centre": {
+   "count": 131832,
+   "lowConf": 6268,
+   "day": 55375,
+   "frp": 3697836
+  },
+  "Kamloops Fire Centre": {
+   "count": 230166,
+   "lowConf": 11753,
+   "day": 96440,
+   "frp": 9055477
+  },
+  "Northwest Fire Centre": {
+   "count": 235928,
+   "lowConf": 12441,
+   "day": 91610,
+   "frp": 9007067
+  }
+ }
+}
