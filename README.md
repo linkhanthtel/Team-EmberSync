@@ -97,6 +97,8 @@ The calendar and the FIRMS summary are bundled. The map cells, watch list and fi
 
 The fire-centre GeoJSON uses RFC 7946 ring order (counter-clockwise); `loadCentres()` reverses the rings for d3-geo.
 
+Place names: GeoNames (geonames.org), CC BY 4.0
+
 **Insights file.** Make the call reads any `src/data/*insights*.csv` with columns `fire_centre, ym, insight` (ym as `YYYY-MM`). Rows in that file are shown as team reviewed. Until it exists, the screen shows rule-based drafts, labelled as drafts.
 
 ## Team
